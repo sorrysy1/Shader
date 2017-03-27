@@ -10,7 +10,7 @@
 
 // some parameters....
 
-float coast2water_fadedepth = 0.10;
+float coast2water_fadedepth = 0.10; //海岸-水衰减深度
 float large_waveheight      = 0.50; // change to adjust the "heavy" waves
 float large_wavesize        = 4.;  // factor to adjust the large wave size
 float small_waveheight      = .6;  // change to adjust the small random waves
