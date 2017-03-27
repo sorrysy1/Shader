@@ -1,0 +1,5 @@
+/*
+*start 起始 end 终点 parameter 差值
+*smoothstep 取从起点到终点 非线性的增加
+*/
+float smoothstep(float start, float end, float parameter)
