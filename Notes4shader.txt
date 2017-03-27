@@ -2,4 +2,42 @@
 *start 起始 end 终点 parameter 差值
 *smoothstep 取从起点到终点 非线性的增加
 */
-float smoothstep(float start, float end, float parameter)
+float smoothstep(float start, float end, float parameter);
+
+
+/*
+*x⋅(1−a)+y⋅a
+*返回线性混合的x和y
+*/
+float mix (float x, float y, float a);
+
+
+/*
+*最小数值和最大数值指定返回值的范围。
+*参数是值要钳制在范围内的属性或变量。
+*如果参数位于最小数值和最大数值之间的数值范围内，则该函数将返回参数值。
+*如果参数大于范围，该函数将返回最大数值。
+*如果参数小于范围，该函数将返回最小数值。
+*/
+genType clamp (genType x, float minVal, float maxVal)
+
+
+/*
+*
+*返回以x为底的y次方值
+*/
+float pow(float x, float y);
+
+
+/*
+*genType ：vec2 vec3
+*标准化向量，返回一个方向和x相同但长度为1的向量
+*归一算法
+*/
+genType normalize (genType x);
+
+/*
+*向量x，y之间的点积
+*归一算法
+*/
+float dot (genType x, genType y);
