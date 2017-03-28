@@ -5,10 +5,17 @@
 //将指定光源颜色的RGB值范围是[0-1]，然后把光源颜色和物体表面颜色相乘，得到光反射的颜色
 
 
-/*环境光  环境光就是在没有太阳的情况下，你周围的光照情况，它模拟的是太阳光照射地面后，在不同的位置被反射，折射，
-*/最后混合在一起的一种光线，环境光没有方向，没有起点，它是一种均匀的光照效果，即使在阴影中，也有环境光存在。
-
-vec4 AmbientColor = vec4(gDirectionalLight.Color, 1.0f) * gDirectionalLight.AmbientIntensity; 
+/*
+*环境光  环境光就是在没有太阳的情况下，你周围的光照情况，它模拟的是太阳光照射地面后，在不同的位置被反射，折射，
+*最后混合在一起的一种光线，环境光没有方向，没有起点，它是一种均匀的光照效果，即使在阴影中，也有环境光存在。
+*/
+vec4 AmbientColor()
+{
+  vec4 AmbientColor = vec4(gDirectionalLight.Color, 1.0f) * gDirectionalLight.AmbientIntensity; 
+  return AmbientColor;
+}
 
 /*
+*
+*
 */
