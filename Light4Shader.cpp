@@ -59,6 +59,59 @@ vec4 SpecularColor()
   return SpecularColor;
 }
 
+//点光源（PointLight） 点光源是起始于一个点，向四面照射，会随着传输距离增加而衰减，所以在点光源属性中，我们会增加一个光源位置。
+//通常点光源衰减程度离物体距离的平方成反   点光源衰减程度= 光源强度/光源到像素距离的平方²
+//3D环境下 点光源衰减程度= 光源强度/ 常量因子（Constant） + 线性因子（Linear）*光源到像素距离 + 二次因子（Exp） *光源到像素距离的平方²
+vec4 CalcPointLight(点光源，法线向量) 
+{ 
+ //在世界坐标系中，计算点(像素)到光源的方向，做为光源的方向向量。
+vec3 LightDirection = WorldPos0 - gPointLights[Index].Position; 
+ //计算像素到光源的距离，用来计算衰减因子。
+float Distance = length(LightDirection); 
+LightDirection = normalize(LightDirection); 
+ //点光源的颜色 = 环境光 + 漫反射 + 高光
+vec4 Color = AmbientColor + DiffuseColor + SpecularColor; 
+  
+float Attenuation = gPointLights[Index].Atten.Constant + 
+gPointLights[Index].Atten.Linear * Distance + 
+gPointLights[Index].Atten.Exp * Distance * Distance; 
+//返回 点光源衰减程度
+return Color / Attenuation; 
+}
+
+//聚光灯光源 Spotlight 聚光灯的的光照效果，聚光灯有光源位置，也会随着传播距离增加而衰减，还有照射方向，另外聚光灯增加的特性是，它的照射范围在一个圆锥内，类似探照灯的效果。
+//聚光灯点光源颜色 PointLight
+//聚光灯光照方向 SpotlightDirection
+//聚光灯圆锥夹角 angle [0,1]
+vec4 CalcSpotLight(struct SpotLight l, vec3 Normal) 
+{ 
+  //视线归一向量
+vec3 LightToPixel = normalize(WorldPos0 - l.Base.Position); 
+  //聚光灯光照方向 与 视线归一向量 点积 计算出余弦值[0,1]
+float SpotFactor = dot(LightToPixel, l.Direction); 
+  //余弦值必须大于圆锥角度  否则肉眼不可见
+  if (SpotFactor > l.angle)
+  { 
+    //根据光源与法向量计算点光源颜色
+    vec4 Color = CalcPointLight(l.Base, Normal); 
+    //聚光灯强度 SpotIntensity = 1-（1 - SpotFactor）/（1 - angle）
+    //聚光灯光源颜色  = 点光源颜色 * SpotIntensity
+    return Color * (1.0 - (1.0 - SpotFactor) * 1.0/(1.0 - l.angle)); 
+  } 
+  else 
+  { 
+    return vec4(0,0,0,0); 
+  } 
+}
+
+
+
+
+
+
+
+
+
 
 
 
