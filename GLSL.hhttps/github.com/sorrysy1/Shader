@@ -56,3 +56,32 @@ struct gl_LightSourceParameters
     float linearAttenuation;  
     float quadraticAttenuation;  
 }; 
+//材质属性
+struct gl_MaterialParameters  
+{  
+    vec4 emission;  //散射光
+    vec4 ambient;  //环境光
+    vec4 diffuse;  //漫反射
+    vec4 specular;  //高光
+    float shininess;  //材质反射因子 因子越大反射光强度下降越快 
+};  
+
+//漫反射光的强度 = 光源的散射成分（gl_LightSourceParameters.diffuse ）*材质的散射系数（gl_MaterialParameters.diffuse ）* 余弦值（
+//cos）
+//镜面反射即高光
+void main()
+{
+//像素法矢向量与光源矢向量点积 当小于0时不存在高光
+if (NdotL > 0.0)  
+{  
+    // normalize the half-vector, and then compute the  
+    // cosine (dot product) with the normal  
+    NdotHV = max(dot(normal, gl_LightSource[0].halfVector.xyz),0.0);  
+    specular = gl_FrontMaterial.specular * gl_LightSource[0].specular *  
+            pow(NdotHV,gl_FrontMaterial.shininess);  
+}  
+}
+
+
+
+
