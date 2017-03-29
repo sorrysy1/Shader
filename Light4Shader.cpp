@@ -107,11 +107,15 @@ float SpotFactor = dot(LightToPixel, l.Direction);
 
 
 
-
-
-
-
-
+//在多光源的情况下 我们需要对多个光源的光效果做累加的到最终的光源颜色
+//再用纹理颜色与最终光源颜色进行混合
+{
+for(int i = 0 ; i < 总光源数量NUM ; i++){
+  TotalLight +=各个光源颜色;
+}
+  //最终纹理颜色
+  FragColor  = texture2D(纹理, TexCoord0.xy) * TotalLight; 
+}
 
 
 
