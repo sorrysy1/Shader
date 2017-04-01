@@ -1,3 +1,6 @@
+
+Attribute变量的数据类型只能为：float, vec2,vec3, vec4, mat2, mat3, and mat4；
+
 /*
 *start 起始 end 终点 parameter 差值
 *smoothstep 取从起点到终点 非线性的增加
