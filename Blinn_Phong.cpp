@@ -6,6 +6,16 @@
 
 //在处理纹理图片之前需要给该纹理图片设置其需要进行高光效果的  高光通道（tex.a） a 的取值范围决定了高光效果1~0  1为最强 0 为无
 
+//shader 的Blinn_Phong与原Phong光照效果最大的不同在在于镜面反射的Specular中的不同 
+//为了解决镜面反射中出现失效的情况，使用半角向量来完善当入射光与视线向量夹角小于90时出现差错的情况
+//vec3 lightDir = normalize(lightPos - FragPos);  
+//vec3 viewDir = normalize(viewPos - FragPos);  
+//vec3 halfwayDir = normalize(lightDir + viewDir);  
+//float spec = pow(max(dot(normal, halfwayDir), 0.0), shininess);  
+//vec3 specular = lightColor * spec;  
+
+
+
 Shader "ApcShader/BlinnPhongWithTex"
 {
 	//属性
