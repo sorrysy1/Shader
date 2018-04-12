@@ -42,9 +42,9 @@ void main()
     *当网格过多的情况下 会导致切线空间相互不垂直 与下列方法（格拉姆-施密特正交化）校正空间向量
     *vec3 T = normalize(vec3(model * vec4(tangent, 0.0)));  
     *vec3 N = normalize(vec3(model * vec4(tangent, 0.0)));  
-    *// re-orthogonalize T with respect to N  
+    * re-orthogonalize T with respect to N  
     *T = normalize(T - dot(T, N) * N);  
-    *// then retrieve perpendicular vector B with the cross product of T and N  
+    * then retrieve perpendicular vector B with the cross product of T and N  
     *vec3 B = cross(T, N);  
     *mat3 TBN = mat3(T, B, N)  
     */ 
